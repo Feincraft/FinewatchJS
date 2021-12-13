@@ -27,13 +27,13 @@ class AppMagneticForce {
     InputA() {
         if (this.mode) {
             this.mode = false;
-            AppManager.AppTasks = [function () {
+             TaskManager.AppTasks = [function () {
                 led.plotBarGraph(Math.abs(Math.trunc(input.magneticForce(this.dimension))), 1000)
             }];
         }
         else {
             this.mode = true;
-            AppManager.AppTasks = [function () {
+             TaskManager.AppTasks = [function () {
                 basic.showString(Math.trunc(input.magneticForce(this.dimension)).toString());
             }];
         }

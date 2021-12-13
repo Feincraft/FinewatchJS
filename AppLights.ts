@@ -33,7 +33,7 @@ class AppLights {
         //if (this.brightness == 255) this.brightness = 5;
         //this.brightness += 50;
         //this.strip.setBrightness(this.brightness);
-        AppManager.AppTasks = [];
+         TaskManager.AppTasks = [];
         this.strip.setPixelColor(0, NeoPixelColors.White);
         this.strip.setPixelColor(1, NeoPixelColors.White);
         this.strip.show();
@@ -41,7 +41,7 @@ class AppLights {
     InputB() {
         //if (this.color > NeoPixelColors.White) this.color = 0;
         //this.color += 100000;
-        AppManager.AppTasks = [ function () { 
+         TaskManager.AppTasks = [ function () { 
             let strip = neopixel.create(DigitalPin.P0, 2, NeoPixelMode.RGB);
             strip.setPixelColor(0, Xi++);
             strip.setPixelColor(1, Xi++);

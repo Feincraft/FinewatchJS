@@ -20,7 +20,7 @@ class AppWatch {
     }
 
     RunApp() {
-        AppManager.AppTasks = [function () {
+         TaskManager.AppTasks = [function () {
             // Calculate current time
             let ms = input.runningTime() + (this.hourOffset * 60 * 60 * 1000) + (this.minuteOffset * 60 * 1000);
             if (ms > 86400000) ms = ms - 86400000;

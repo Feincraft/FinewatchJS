@@ -24,13 +24,13 @@ class AppTempSensor {
     InputA() {
         if (this.mode) {
             this.mode = false;
-            AppManager.AppTasks = [function () {
+             TaskManager.AppTasks = [function () {
                 led.plotBarGraph(input.temperature(), 50);
             }];
         }
         else {
             this.mode = true;
-            AppManager.AppTasks = [function () {
+             TaskManager.AppTasks = [function () {
                 basic.showString(input.temperature().toString());
             }];
         }

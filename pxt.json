@@ -5,20 +5,21 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "neopixel": "github:microsoft/pxt-neopixel#v0.7.3",
-        "inkybit": "github:pimoroni/pxt-inkybit#v0.0.3"
+        "neopixel": "github:microsoft/pxt-neopixel#v0.7.3"
     },
     "files": [
         "main.ts",
         "README.md",
-        "AppManager.ts",
-        "MusicLibrary.ts",
         "AppWatch.ts",
         "AppMusic.ts",
         "AppTempSensor.ts",
         "AppSoundLevel.ts",
         "AppMagneticForce.ts",
-        "AppLights.ts"
+        "AppLights.ts",
+        "TaskManager.ts",
+        "AppCompass.ts",
+        "AppForce.ts",
+        "AppGameRPS.ts"
     ],
     "testFiles": [
         "test.ts"

@@ -1,125 +1,32 @@
 input.onButtonPressed(Button.B, function () {
-    AppManager.InputB();
+     TaskManager.InputB();
 });
 
 input.onButtonPressed(Button.A, function () {
-    AppManager.InputA();
+     TaskManager.InputA();
 });
 
 input.onButtonPressed(Button.AB, function () {
-    AppManager.InputAB();
+     TaskManager.InputAB();
 });
 
 
 input.onGesture(Gesture.Shake, function () {
-    AppManager.Shake();
+     TaskManager.Shake();
 })
 
 
 basic.forever(function () {
-    for (let x = 0; x < AppManager.AppTasks.length; x++) {
-        AppManager.AppTasks[x]();
+    for (let x = 0; x <  TaskManager.AppTasks.length; x++) {
+         TaskManager.AppTasks[x]();
     } 
-    for (let x = 0; x < AppManager.SystemTasks.length; x++) {
-        AppManager.SystemTasks[x]();
+    for (let x = 0; x <  TaskManager.SystemTasks.length; x++) {
+         TaskManager.SystemTasks[x]();
     }
 })
 
-
-class AppCompass {
-    constructor() {
-        this.appIcon = images.createImage(`
-            # . . . #
-            # # . . #
-            # . # . #
-            # . . # #
-            # . . . #
-            `)
-    }
-
-    appIcon: Image;
-
-    RunApp() {
-    }
-
-    CloseApp() {
-    }
-
-    InputA() {
-
-    }
-    InputB() {
-
-    }
-    InputAB() {
-
-    }
-    Shake() { }
-}
-
-class AppForce {
-    constructor() {
-        this.appIcon = images.createImage(`
-            . . # # .
-            . # . # .
-            . # # # .
-            . . . # .
-            . # # . .
-            `)
-    }
-
-    appIcon: Image;
-
-    RunApp() {
-    }
-
-    CloseApp() {
-    }
-
-    InputA() {
-
-    }
-    InputB() {
-
-    }
-    InputAB() {
-
-    }
-    Shake() { }
-}
-class AppRPS {
-    constructor() {
-        this.appIcon = images.createImage(`
-            # . . . #
-            . # . # .
-            . . # . .
-            . # . # .
-            # # . # #
-            `)
-    }
-
-    appIcon: Image;
-
-    RunApp() {
-    }
-
-    CloseApp() {
-    }
-
-    InputA() {
-
-    }
-    InputB() {
-
-    }
-    InputAB() {
-
-    }
-    Shake() { }
-}
-
-AppManager.Init();
-AppManager.HomeScreen();
+ TaskManager.Init();
+ TaskManager.HomeScreen();
 
 
 
