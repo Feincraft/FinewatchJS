@@ -4,7 +4,8 @@ class TaskManager {
         TaskManager.installedApps =
             [new AppWatch, new AppCompass, new AppForce,
             new AppGameRPS, new AppSoundLevel, new AppMusic,
-            new AppTempSensor, new AppMagneticForce, new AppLights];
+            new AppTempSensor, new AppMagneticForce, new AppLights, 
+            new AppGameAcidRain];
 
         TaskManager.selectedAppIndex = 0;
         TaskManager.AppTasks = [];

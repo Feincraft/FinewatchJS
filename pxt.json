@@ -19,7 +19,8 @@
         "TaskManager.ts",
         "AppCompass.ts",
         "AppForce.ts",
-        "AppGameRPS.ts"
+        "AppGameRPS.ts",
+        "AppGameAcidRain.ts"
     ],
     "testFiles": [
         "test.ts"
