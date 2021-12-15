@@ -23,7 +23,8 @@ class TaskManager {
                 new AppTempSensor(), 
                 new AppMagneticForce(), 
                 new AppGameRPS(),
-                new AppGameAcidRain()
+                new AppGameAcidRain(),
+                new AppGameMemory()
             ];
 
         TaskManager.selectedAppIndex = 0;
@@ -57,15 +58,12 @@ class TaskManager {
         TaskManager.homeScreenControl = true;
         let icon: Image = TaskManager.installedApps[TaskManager.selectedAppIndex].appIcon;
         icon.showImage(0);
-        led.setBrightness(255);
-        led.fadeIn(100);
-        control.waitMicros(200000)
-        TaskManager.AppTasks = [function () { TaskManager.EnvironmentControl() } ]
+        TaskManager.AppTasks = [ function () { TaskManager.EnvironmentControl() } ]
     }
 
     // Control power output
     static EnvironmentControl() {
-        led.setBrightness(input.lightLevel() + 10);
+        led.setBrightness(input.lightLevel() + 20);       
     }
 
     // Select app or pass input
@@ -97,8 +95,7 @@ class TaskManager {
         TaskManager.AppTasks = [];
         TaskManager.installedApps[TaskManager.selectedAppIndex].CloseApp();
         led.fadeOut(200);
-        control.reset()
-        // TaskManager.HomeScreen(); 
+        TaskManager.HomeScreen(); 
     }
 
     static Shake() {

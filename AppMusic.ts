@@ -1,12 +1,6 @@
 class AppMusic {
     constructor() {
-        this.appIcon = images.createImage(`
-            . . # # .
-            . . # # #
-            . . # . .
-            # # # . .
-            # # # . .
-            `);
+        this.appIcon = images.iconImage(IconNames.EigthNote)
         this.selectedTrack = 0;
     }
 

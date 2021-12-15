@@ -10,7 +10,7 @@ input.onButtonPressed(Button.AB, function () {
      TaskManager.InputAB();
 });
 
-/*
+
 input.onGesture(Gesture.Shake, function () {
      TaskManager.Shake();
 })
@@ -39,7 +39,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
 
 })
-*/
+
 
 basic.forever(function () {
     TaskManager.RunTasks();

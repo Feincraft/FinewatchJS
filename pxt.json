@@ -19,7 +19,8 @@
         "AppCompass.ts",
         "AppForce.ts",
         "AppGameRPS.ts",
-        "AppGameAcidRain.ts"
+        "AppGameAcidRain.ts",
+        "AppGameLife.ts"
     ],
     "testFiles": [
         "test.ts"
