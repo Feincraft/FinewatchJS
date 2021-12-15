@@ -1,3 +1,5 @@
+// Requires NeoPixel
+/*
 class AppLights {
     constructor() {
         this.appIcon = images.createImage(`
@@ -57,5 +59,4 @@ class AppLights {
     }
     Shake() { }
 }
-
-let Xi =0;
+*/

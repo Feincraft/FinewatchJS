@@ -7,6 +7,7 @@ class AppGameAcidRain {
             . . . . .
             . . # . .
             `)
+
         this.obstacleBrightness = 30
         this.maxSpeed = 100000
     }
@@ -18,7 +19,7 @@ class AppGameAcidRain {
     scoreEarned: number
     player: game.LedSprite
     obstacles: game.LedSprite[]
-    gameOver: Boolean
+    gameOver: boolean
     maxSpeed: number
     obstacleBrightness: number
 
@@ -36,72 +37,71 @@ class AppGameAcidRain {
             game.createSprite(3, 0),
             game.createSprite(4, 0)
         ]
-        for (let x = 0; x <= 4; x++) {
+        for (let x = 0; x < 5; x++) {
             this.obstacles[x].setBrightness(this.obstacleBrightness)
         }
         this.gameOver = false
+        game.resume()
     }
 
-    EndGame() {
+    EndGame(instance: AppGameAcidRain) {
+        instance.gameOver = true
+        game.pause()
         for (let x = 0; x < 5; x++) {
-            this.obstacles[x].delete()
+            instance.obstacles[x].delete()
         }
-        this.player.delete()
-        this.gameOver = true
+        instance.player.delete()  
+    }
+    
+
+    GameLoop(instance: AppGameAcidRain) {
+        // Show score if game is over
+        if (instance.gameOver) {
+            basic.clearScreen()
+            basic.showString(game.score().toString())
+            return
+        }
+
+        // Move obstacles
+        instance.spriteMove = randint(0, 4)
+        if (instance.obstacles[instance.spriteMove].isDeleted()) {
+            instance.obstacles[instance.spriteMove] = game.createSprite(instance.spriteMove, 0)
+            instance.obstacles[instance.spriteMove].setBrightness(instance.obstacleBrightness)
+        }
+        else if (instance.obstacles[instance.spriteMove].y() >= 4) {
+            instance.obstacles[instance.spriteMove].delete()
+        }
+        else {
+            instance.obstacles[instance.spriteMove].change(LedSpriteProperty.Y, 1)
+        }
+
+        // Detect collision
+        for (let x = 0; x < 5; x++) {
+            if (instance.player.x() == instance.obstacles[x].x() &&
+                instance.player.y() == instance.obstacles[x].y() &&
+                !(instance.obstacles[x].isDeleted())) {
+                instance.EndGame(instance)
+                return
+            }
+        }
+
+        // Increase game speed and score
+        if (instance.speed > instance.maxSpeed) {
+            instance.speed -= 3000
+            instance.scoreEarned += 1
+        }
+        game.setScore(game.score() + instance.scoreEarned)
+        control.waitMicros(instance.speed)
     }
 
     RunApp() {
+        led.fadeIn(100);
         this.ResetGame()
-        TaskManager.AppTasks.push(function () {
-            // Show score if game is over
-            if (this.gameOver) {
-                basic.clearScreen()
-                basic.showString(game.score().toString())
-                return
-            }
-
-            // Check for tilt controls
-            if (input.rotation(Rotation.Roll) < -20) {
-                this.player.changeXBy(-1)
-            }
-            if (input.rotation(Rotation.Roll) > 20) {
-                this.player.changeXBy(1)
-            }
-
-            // Move obstacles
-            this.spriteMove = randint(0, 4)
-            if (this.obstacles[this.spriteMove].isDeleted()) {
-                this.obstacles[this.spriteMove] = game.createSprite(this.spriteMove, 0)
-                this.obstacles[this.spriteMove].setBrightness(this.obstacleBrightness)
-            }
-            else if (this.obstacles[this.spriteMove].y() >= 4) {
-                this.obstacles[this.spriteMove].delete()
-            }
-            else {
-                this.obstacles[this.spriteMove].change(LedSpriteProperty.Y, 1)
-            }
-
-            // Detect collision
-            for (let x = 0; x < 5; x++) {
-                if (this.player.x() == this.obstacles[x].x() && 
-                this.player.y() == this.obstacles[x].y() && 
-                !(this.obstacles[x].isDeleted())) {
-                    this.EndGame()
-                    return
-                }
-            }
-
-            // Increase game speed and score
-            if (this.speed > this.maxSpeed) {
-                this.speed -= 3000
-                this.scoreEarned += 1
-            }
-            game.setScore(game.score() + this.scoreEarned)
-            control.waitMicros(this.speed)
-        })
+        TaskManager.AppTasks = [ function () { this.GameLoop(this) }]
     }
 
-    CloseApp() {
+    CloseApp() {  
+        this.EndGame(this);  
     }
 
     InputA() {
@@ -111,6 +111,7 @@ class AppGameAcidRain {
             this.player.changeXBy(-1)
         }
     }
+    
     InputB() {
         this.player.changeXBy(1)
     }
@@ -118,6 +119,4 @@ class AppGameAcidRain {
     InputAB() {
 
     }
-
-    Shake() { }
 }

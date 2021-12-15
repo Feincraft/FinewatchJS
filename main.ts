@@ -10,23 +10,40 @@ input.onButtonPressed(Button.AB, function () {
      TaskManager.InputAB();
 });
 
-
+/*
 input.onGesture(Gesture.Shake, function () {
      TaskManager.Shake();
 })
 
 
-basic.forever(function () {
-    for (let x = 0; x <  TaskManager.AppTasks.length; x++) {
-         TaskManager.AppTasks[x]();
-    } 
-    for (let x = 0; x <  TaskManager.SystemTasks.length; x++) {
-         TaskManager.SystemTasks[x]();
-    }
+input.onGesture(Gesture.TiltLeft, function () {
+    TaskManager.TiltLeft();
 })
 
- TaskManager.Init();
- TaskManager.HomeScreen();
+input.onGesture(Gesture.TiltRight, function () {
+    
+})
 
+input.onGesture(Gesture.ScreenUp, function () {
 
+})
 
+input.onGesture(Gesture.ScreenDown, function () {
+
+})
+
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+
+})
+
+input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
+
+})
+*/
+
+basic.forever(function () {
+    TaskManager.RunTasks();
+})
+
+TaskManager.Init();
+TaskManager.HomeScreen();
