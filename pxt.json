@@ -20,7 +20,8 @@
         "AppForce.ts",
         "AppGameRPS.ts",
         "AppGameAcidRain.ts",
-        "AppGameLife.ts"
+        "AppGameLife.ts",
+        "ServiceMeasuringKit.ts"
     ],
     "testFiles": [
         "test.ts"

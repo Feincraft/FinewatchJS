@@ -5,7 +5,7 @@ class TaskManager {
     static selectedAppIndex: int8;
     static installedApps: any[];
     static AppTasks: any[];
-    static SystemTasks: any[];
+    static ServiceTasks: any[];
     static currentAppTask: number = 0;
     static currentSystemTask: number = 0;
     static powerSavingMode: boolean = false;
@@ -16,12 +16,12 @@ class TaskManager {
         TaskManager.installedApps =
             [
                 new AppWatch(), 
-                //new AppCompass(), 
+                //new AppCompass(),
                 //new AppForce(),
                 new AppSoundLevel(), 
                 //new AppMusic(),
                 new AppTempSensor(), 
-                new AppMagneticForce(), 
+                //new AppMagneticForce(), 
                 new AppGameRPS(),
                 new AppGameAcidRain(),
                 new AppGameMemory()
@@ -29,7 +29,12 @@ class TaskManager {
 
         TaskManager.selectedAppIndex = 0;
         TaskManager.AppTasks = [];
-        TaskManager.SystemTasks = [];
+        TaskManager.ServiceTasks = []; 
+
+        // Add background services
+        TaskManager.ServiceTasks = [
+            //function () { new ServiceMeasuringKit().RunService() }
+        ]
     }
 
     // Run app and system tasks
@@ -43,9 +48,9 @@ class TaskManager {
         }
 
         // Background system tasks
-        if (TaskManager.SystemTasks.length > 0) {
-            TaskManager.SystemTasks[TaskManager.currentSystemTask++]()
-            if (TaskManager.currentSystemTask >= TaskManager.SystemTasks.length) {
+        if (TaskManager.ServiceTasks.length > 0) {
+            TaskManager.ServiceTasks[TaskManager.currentSystemTask++]()
+            if (TaskManager.currentSystemTask >= TaskManager.ServiceTasks.length) {
                 TaskManager.currentSystemTask = 0;
             }
         }
