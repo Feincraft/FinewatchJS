@@ -102,6 +102,7 @@ class AppGameAcidRain {
 
     CloseApp() {
         this.EndGame(this);
+        control.reset();
     }
 
     InputA() {
