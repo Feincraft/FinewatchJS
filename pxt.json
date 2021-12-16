@@ -21,7 +21,8 @@
         "AppGameRPS.ts",
         "AppGameAcidRain.ts",
         "AppGameLife.ts",
-        "ServiceMeasuringKit.ts"
+        "ServiceMeasuringKit.ts",
+        "AppTemplate.ts"
     ],
     "testFiles": [
         "test.ts"

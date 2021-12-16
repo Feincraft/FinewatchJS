@@ -15,13 +15,14 @@ class TaskManager {
         // Enabling too many apps will result in compile error due to program size 
         TaskManager.installedApps =
             [
-                new AppWatch(), 
+                /* ENABLE THE APPS YOU NEED */
+                new AppWatch(),
                 //new AppCompass(),
                 //new AppForce(),
                 new AppSoundLevel(), 
                 //new AppMusic(),
                 new AppTempSensor(), 
-                //new AppMagneticForce(), 
+                new AppMagneticForce(), 
                 new AppGameRPS(),
                 new AppGameAcidRain(),
                 new AppGameMemory()
@@ -30,11 +31,28 @@ class TaskManager {
         TaskManager.selectedAppIndex = 0;
         TaskManager.AppTasks = [];
         TaskManager.ServiceTasks = []; 
-
+        
         // Add background services
         TaskManager.ServiceTasks = [
-            //function () { new ServiceMeasuringKit().RunService() }
+            /* ENABLE THE SERVICES YOU NEED */
+            // () => { new ServiceMeasuringKit().RunService() }
         ]
+
+        // Init system events and inputs
+        basic.forever(() => TaskManager.RunTasks())
+        input.onButtonPressed(Button.B, () =>                   { TaskManager.InputB(); });
+        input.onButtonPressed(Button.A, () =>                   { TaskManager.InputA();  });
+        input.onButtonPressed(Button.AB, () =>                  {TaskManager.InputAB(); });
+        input.onGesture(Gesture.Shake, () =>                    { TaskManager.Shake(); })
+        input.onGesture(Gesture.TiltLeft, () =>                 { TaskManager.TiltLeft(); })
+        input.onGesture(Gesture.TiltRight, () =>                { TaskManager.TiltRight(); })
+        input.onGesture(Gesture.ScreenUp, () =>                 { TaskManager.ScreenUp(); })
+        input.onGesture(Gesture.ScreenDown, () =>               { TaskManager.ScreenDown(); })
+        input.onLogoEvent(TouchButtonEvent.Pressed, () =>       { TaskManager.LogoPress(); })
+        input.onLogoEvent(TouchButtonEvent.LongPressed, () =>   { TaskManager.LogoLongPress(); })
+
+        // TaskManager initializiation completed, starting home screen
+        TaskManager.HomeScreen()
     }
 
     // Run app and system tasks
@@ -144,3 +162,5 @@ class TaskManager {
         if (i.LogoLongPress != undefined) i.LogoLongPress();
     }
 }
+
+TaskManager.Init()

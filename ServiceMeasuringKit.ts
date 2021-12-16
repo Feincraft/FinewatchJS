@@ -1,3 +1,4 @@
+/* Send device measurements via USB */
 class ServiceMeasuringKit {
     constructor() { }
 
