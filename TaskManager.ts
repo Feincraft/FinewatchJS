@@ -85,7 +85,6 @@ class TaskManager {
             let icon: Image = TaskManager.installedApps[TaskManager.selectedAppIndex].appIcon;
             icon.showImage(0);
         }
-        else images.iconImage(IconNames.Square).showImage(0)
         TaskManager.AppTasks = [ function () { TaskManager.EnvironmentControl() } ]
     }
 

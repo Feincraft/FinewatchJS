@@ -25,7 +25,6 @@ class ServiceMeasuringKit {
 namespace FinewatchServices {
     export enum MeasuringDevice {
         //% block="Magnetic"
-        
         Magnetic = 0,
         //% block="Heading"
         Heading,
