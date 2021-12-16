@@ -15,8 +15,8 @@ class TaskManager {
         // Enabling too many apps will result in compile error due to program size 
         TaskManager.installedApps =
             [
-                /* ENABLE THE APPS YOU NEED */
-                new AppWatch()
+                /* ENABLE DEFAULT APPS */
+                //new AppWatch()
                 //new AppCompass(),
                 //new AppForce(),
                 //new AppSoundLevel(), 
@@ -80,8 +80,12 @@ class TaskManager {
         TaskManager.AppTasks = []
         basic.clearScreen();
         TaskManager.homeScreenControl = true;
-        let icon: Image = TaskManager.installedApps[TaskManager.selectedAppIndex].appIcon;
-        icon.showImage(0);
+        if (TaskManager.installedApps.length > 0) 
+        {
+            let icon: Image = TaskManager.installedApps[TaskManager.selectedAppIndex].appIcon;
+            icon.showImage(0);
+        }
+        else basic.showString("No Apps") 
         TaskManager.AppTasks = [ function () { TaskManager.EnvironmentControl() } ]
     }
 
@@ -92,6 +96,7 @@ class TaskManager {
 
     // Select app or pass input
     static InputA() {
+        if (TaskManager.installedApps.length == 0) return
         if (TaskManager.homeScreenControl) {
             TaskManager.selectedAppIndex++;
             if (TaskManager.selectedAppIndex >= TaskManager.installedApps.length)
@@ -104,6 +109,7 @@ class TaskManager {
 
     // Start app or pass input
     static InputB() {
+        if (TaskManager.installedApps.length == 0) return
         if (TaskManager.homeScreenControl) {
             TaskManager.homeScreenControl = false;
             TaskManager.AppTasks = [];
@@ -116,6 +122,7 @@ class TaskManager {
 
     // Reserved Input: Close running app
     static InputAB() {
+        if (TaskManager.installedApps.length == 0) return
         TaskManager.AppTasks = [];
         TaskManager.installedApps[TaskManager.selectedAppIndex].CloseApp();
         led.fadeOut(200);
@@ -123,21 +130,25 @@ class TaskManager {
     }
 
     static Shake() {
+        if (TaskManager.installedApps.length == 0) return
         let i = TaskManager.installedApps[TaskManager.selectedAppIndex]
         if (i.Shake != undefined) i.Shake();
     }
 
     static TiltRight() {
+        if (TaskManager.installedApps.length == 0) return
         let i = TaskManager.installedApps[TaskManager.selectedAppIndex]
         if (i.TiltRight != undefined) i.TiltRight();
     }
 
     static TiltLeft() {
+        if (TaskManager.installedApps.length == 0) return
         let i = TaskManager.installedApps[TaskManager.selectedAppIndex]
         if (i.TiltLeft != undefined) i.TiltLeft();
     }
 
     static ScreenUp() {
+        if (TaskManager.installedApps.length == 0) return
         let i = TaskManager.installedApps[TaskManager.selectedAppIndex]
         if (i.ScreenUp != undefined) i.ScreenUp();
 
@@ -146,6 +157,7 @@ class TaskManager {
     }
 
     static ScreenDown() {
+        if (TaskManager.installedApps.length == 0) return
         let i = TaskManager.installedApps[TaskManager.selectedAppIndex]
         if (i.ScreenDown != undefined) i.ScreenDown();
 
@@ -154,11 +166,13 @@ class TaskManager {
     }
 
     static LogoPress() {
+        if (TaskManager.installedApps.length == 0) return
         let i = TaskManager.installedApps[TaskManager.selectedAppIndex]
         if (i.LogoPress != undefined) i.LogoPress();
     }
 
     static LogoLongPress() {
+        if (TaskManager.installedApps.length == 0) return
         let i = TaskManager.installedApps[TaskManager.selectedAppIndex]
         if (i.LogoLongPress != undefined) i.LogoLongPress();
     }
