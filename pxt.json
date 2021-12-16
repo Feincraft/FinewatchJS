@@ -22,7 +22,8 @@
         "AppGameAcidRain.ts",
         "AppGameLife.ts",
         "ServiceMeasuringKit.ts",
-        "AppTemplate.ts"
+        "AppTemplate.ts",
+        "BlockManager.ts"
     ],
     "testFiles": [
         "test.ts"
