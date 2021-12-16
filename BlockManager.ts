@@ -1,4 +1,4 @@
-//% color=100 weight=500 icon="\uf121" block="Finewatch Apps"
+//% color=110 weight=500 icon="\uf121" block="Finewatch Apps"
 namespace FinewatchApps {
     //% block
     export function addWatchApp(): void {
@@ -61,7 +61,7 @@ namespace FinewatchApps {
     }
 }
 
-//% color=180 weight=500 icon="\uf013" block="Finewatch Services"
+//% color=200 weight=500 icon="\uf013" block="Finewatch Services"
 namespace FinewatchServices {
     //% block
     export function addMeasuringKit(i: FinewatchServices.MeasuringDevice): void {
