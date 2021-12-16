@@ -1,5 +1,5 @@
 
-> Open this page at [https://feincraft.github.io/finewatchjs/](https://feincraft.github.io/finewatchjs/)
+> Open this page at [https://feincraft.github.io/FinewatchJS/](https://feincraft.github.io/finewatchjs/)
 
 ## Use as Extension
 
