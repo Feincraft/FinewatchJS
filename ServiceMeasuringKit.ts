@@ -1,14 +1,45 @@
-/* Send device measurements via USB */
-class ServiceMeasuringKit {
-    constructor() { }
-
-    RunService () {
-        //serial.writeValue("Magnetic", input.magneticForce(Dimension.Strength))
-        //serial.writeValue("Heading", input.compassHeading())
-        serial.writeValue("Temperature", input.temperature())
-        serial.writeValue("Sound", input.soundLevel())
-        serial.writeValue("Light", input.lightLevel())
-        //serial.writeValue("Rotaion X", input.rotation(Rotation.Roll))
-        //serial.writeValue("Rotaion Y", input.rotation(Rotation.Pitch))
+class AppSoundLevel {
+    constructor() {
+        this.appIcon = images.createImage(`
+            . # # # .
+            . # # # .
+            . # # # .
+            . . # . .
+            . # # # .
+            `);
+        this.mode = false;
     }
+
+    appIcon: Image;
+    mode: boolean;
+
+    RunApp() {
+        this.InputA();
+        led.fadeIn(150);
+    }
+
+    CloseApp() {
+    }
+
+    InputA() {
+        if (this.mode) {
+            this.mode = false;
+             TaskManager.AppTasks = [function () {
+                led.plotBarGraph(input.soundLevel(), 160);
+            }];
+        }
+        else {
+            this.mode = true;
+             TaskManager.AppTasks = [function () {
+                basic.showString(input.soundLevel().toString());
+            }];
+        }
+    }
+    InputB() {
+
+    }
+    InputAB() {
+
+    }
+    Shake() { }
 }

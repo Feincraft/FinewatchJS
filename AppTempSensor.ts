@@ -1,11 +1,11 @@
-class AppTempSensor {
+class AppSoundLevel {
     constructor() {
         this.appIcon = images.createImage(`
-            . . . . #
-            . # # . .
-            # . . . .
-            # . . . .
-            . # # . .
+            . # # # .
+            . # # # .
+            . # # # .
+            . . # . .
+            . # # # .
             `);
         this.mode = false;
     }
@@ -25,13 +25,13 @@ class AppTempSensor {
         if (this.mode) {
             this.mode = false;
              TaskManager.AppTasks = [function () {
-                led.plotBarGraph(input.temperature(), 50);
+                led.plotBarGraph(input.soundLevel(), 160);
             }];
         }
         else {
             this.mode = true;
              TaskManager.AppTasks = [function () {
-                basic.showString(input.temperature().toString());
+                basic.showString(input.soundLevel().toString());
             }];
         }
     }

@@ -1,120 +1,138 @@
-class AppGameAcidRain {
+class AppGameMemory {
     constructor() {
         this.appIcon = images.createImage(`
-            # # # # #
-            . . . . .
-            . . . . .
-            . . . . .
-            . . # . .
+            # . . . #
+            # # . # #
+            # . # . #
+            # . . . #
+            # . . . #
             `)
 
-        this.obstacleBrightness = 30
-        this.maxSpeed = 100000
+        this.obstacleBrightness = 255
+        this.obstacles = []
+        this.blinkers = 0
+        this.scoreBonus = 0
+        this.scoreEarned = 0
+        this.difficulty = 5
+        this.memoryTime = 2500000
     }
 
     appIcon: Image;
 
-    spriteMove: number
-    speed: number
     scoreEarned: number
+    scoreBonus: number
     player: game.LedSprite
     obstacles: game.LedSprite[]
     gameOver: boolean
-    maxSpeed: number
     obstacleBrightness: number
+    blinkers: number
+    difficulty: number
+    memoryTime: number
 
     ResetGame() {
+        TaskManager.AppTasks = []
         basic.clearScreen()
         game.setScore(0)
-        this.spriteMove = 0
-        this.speed = 700000
-        this.scoreEarned = 1
-        this.player = game.createSprite(2, 4)
-        this.obstacles = [
-            game.createSprite(0, 0),
-            game.createSprite(1, 0),
-            game.createSprite(2, 0),
-            game.createSprite(3, 0),
-            game.createSprite(4, 0)
-        ]
+        this.scoreBonus = 0
+        this.scoreEarned = 0
+        this.obstacleBrightness = 255
+        this.obstacles = []
+        this.blinkers = 0
+
         for (let x = 0; x < 5; x++) {
-            this.obstacles[x].setBrightness(this.obstacleBrightness)
-        }
-        this.gameOver = false
-        game.resume()
-    }
-
-    EndGame(instance: AppGameAcidRain) {
-        instance.gameOver = true
-        game.pause()
-        for (let x = 0; x < 5; x++) {
-            instance.obstacles[x].delete()
-        }
-        instance.player.delete()  
-    }
-    
-
-    GameLoop(instance: AppGameAcidRain) {
-        // Show score if game is over
-        if (instance.gameOver) {
-            basic.clearScreen()
-            basic.showString(game.score().toString())
-            return
-        }
-
-        // Move obstacles
-        instance.spriteMove = randint(0, 4)
-        if (instance.obstacles[instance.spriteMove].isDeleted()) {
-            instance.obstacles[instance.spriteMove] = game.createSprite(instance.spriteMove, 0)
-            instance.obstacles[instance.spriteMove].setBrightness(instance.obstacleBrightness)
-        }
-        else if (instance.obstacles[instance.spriteMove].y() >= 4) {
-            instance.obstacles[instance.spriteMove].delete()
-        }
-        else {
-            instance.obstacles[instance.spriteMove].change(LedSpriteProperty.Y, 1)
-        }
-
-        // Detect collision
-        for (let x = 0; x < 5; x++) {
-            if (instance.player.x() == instance.obstacles[x].x() &&
-                instance.player.y() == instance.obstacles[x].y() &&
-                !(instance.obstacles[x].isDeleted())) {
-                instance.EndGame(instance)
-                return
+            for (let y = 0; y < 5; y++) {
+                if (Math.trunc(Math.random() * this.difficulty) == 0) {
+                    let sprite = game.createSprite(x, y)
+                    sprite.setBrightness(255)
+                    this.obstacles.push(sprite)
+                    this.blinkers++
+                    this.scoreBonus += 0.5
+                }
             }
         }
 
-        // Increase game speed and score
-        if (instance.speed > instance.maxSpeed) {
-            instance.speed -= 3000
-            instance.scoreEarned += 1
+        this.player = game.createSprite(0, 0)
+        this.player.setBrightness(0)
+
+        this.gameOver = false
+        game.resume()
+
+        control.waitMicros(this.memoryTime);
+    }
+
+    EndGame(won: boolean) {
+        this.gameOver = true
+        game.pause()
+
+        for (let x = 0; x < this.obstacles.length; x++) {
+            this.obstacles[x].delete()
         }
-        game.setScore(game.score() + instance.scoreEarned)
-        control.waitMicros(instance.speed)
+        this.player.delete()
+        this.obstacles = []
+
+        game.setScore(Math.round(this.scoreEarned + this.scoreBonus))
+        if (won) TaskManager.AppTasks = [function () {
+            basic.showString(game.score().toString())
+            }]
+        else basic.showIcon(IconNames.Sad)
+    }
+
+    GameLoop(instance: AppGameMemory) {
+        if (instance.obstacleBrightness == 0) {
+            TaskManager.AppTasks = []
+            instance.player.setBrightness(255)
+            return
+        }
+
+        instance.obstacleBrightness--
+        for (let x = 0; x < instance.obstacles.length; x++) {
+            instance.obstacles[x].setBrightness(instance.obstacleBrightness);
+        }
+        control.waitMicros(20);
     }
 
     RunApp() {
         led.fadeIn(100);
         this.ResetGame()
-        TaskManager.AppTasks = [ function () { this.GameLoop(this) }]
+        TaskManager.AppTasks = [function () { this.GameLoop(this) }]
     }
 
-    CloseApp() {  
-        this.EndGame(this);  
+    CloseApp() {
         control.reset();
     }
 
     InputA() {
         if (this.gameOver) {
-            this.ResetGame()
+            this.RunApp()
         } else {
-            this.player.changeXBy(-1)
+            if (this.player.y() == 4 && this.player.x() == 4) {
+                this.player.setY(0)
+                this.player.setX(0)         
+            } 
+            else if (this.player.x() == 4) {
+                this.player.changeYBy(1)
+                this.player.setX(0)
+            }
+            else this.player.move(1)
         }
     }
-    
+
     InputB() {
-        this.player.changeXBy(1)
+        let bCount = this.blinkers
+
+        for (let x = 0; x < this.obstacles.length; x++) {
+            if (this.obstacles[x].x() == this.player.x() && this.obstacles[x].y() == this.player.y()) {
+                this.obstacles[x].setBlink(200)
+                this.obstacles[x].setBrightness(10)
+                this.blinkers--
+                this.scoreBonus += 0.5
+                this.scoreEarned += 1 + this.scoreBonus
+            }
+        }
+        // Lose :(
+        if (this.blinkers == bCount) this.EndGame(false)
+        // Win!
+        if (this.blinkers == 0) this.EndGame(true)
     }
 
     InputAB() {

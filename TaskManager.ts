@@ -162,5 +162,3 @@ class TaskManager {
         if (i.LogoLongPress != undefined) i.LogoLongPress();
     }
 }
-
-TaskManager.Init()
