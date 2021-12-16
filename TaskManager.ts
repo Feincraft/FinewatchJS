@@ -16,16 +16,17 @@ class TaskManager {
         TaskManager.installedApps =
             [
                 /* ENABLE THE APPS YOU NEED */
-                new AppWatch(),
-                new AppCompass(),
-                new AppForce(),
-                new AppSoundLevel(), 
-                new AppMusic(),
-                new AppTempSensor(), 
-                new AppMagneticForce(), 
-                new AppGameRPS(),
-                new AppGameAcidRain(),
-                new AppGameMemory()
+                new AppWatch()
+                //new AppCompass(),
+                //new AppForce(),
+                //new AppSoundLevel(), 
+                //new AppMusic(),
+                //new AppTempSensor(), 
+                //new AppMagneticForce(), 
+                //new AppGameRPS(),
+                //new AppGameAcidRain(),
+                //new AppGameMemory()
+                
             ];
 
         TaskManager.selectedAppIndex = 0;
