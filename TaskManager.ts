@@ -16,7 +16,7 @@ class TaskManager {
         TaskManager.installedApps =
             [
                 /* ENABLE DEFAULT APPS */
-                //new AppWatch()
+                //new AppWatch(),
                 //new AppCompass(),
                 //new AppForce(),
                 //new AppSoundLevel(), 
@@ -35,7 +35,7 @@ class TaskManager {
         
         // Add background services
         TaskManager.ServiceTasks = [
-            /* ENABLE THE SERVICES YOU NEED */
+            /* ENABLE DEFAULT SERVICES */
             // () => { new ServiceMeasuringKit().RunService() }
         ]
 
@@ -85,7 +85,7 @@ class TaskManager {
             let icon: Image = TaskManager.installedApps[TaskManager.selectedAppIndex].appIcon;
             icon.showImage(0);
         }
-        else basic.showString("No Apps") 
+        else images.iconImage(IconNames.Square).showImage(0)
         TaskManager.AppTasks = [ function () { TaskManager.EnvironmentControl() } ]
     }
 
