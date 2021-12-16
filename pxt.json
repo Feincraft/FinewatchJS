@@ -20,10 +20,10 @@
         "AppForce.ts",
         "AppGameRPS.ts",
         "AppGameAcidRain.ts",
-        "AppGameLife.ts",
         "ServiceMeasuringKit.ts",
         "AppTemplate.ts",
-        "BlockManager.ts"
+        "BlockManager.ts",
+        "AppGameMemory.ts"
     ],
     "testFiles": [
         "test.ts"

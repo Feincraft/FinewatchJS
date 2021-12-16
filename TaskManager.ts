@@ -17,10 +17,10 @@ class TaskManager {
             [
                 /* ENABLE THE APPS YOU NEED */
                 new AppWatch(),
-                //new AppCompass(),
-                //new AppForce(),
+                new AppCompass(),
+                new AppForce(),
                 new AppSoundLevel(), 
-                //new AppMusic(),
+                new AppMusic(),
                 new AppTempSensor(), 
                 new AppMagneticForce(), 
                 new AppGameRPS(),
@@ -162,3 +162,5 @@ class TaskManager {
         if (i.LogoLongPress != undefined) i.LogoLongPress();
     }
 }
+
+TaskManager.Init()
