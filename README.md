@@ -27,7 +27,7 @@ You can add the same app mutiple times.
 **IMPORTANT:** Adding too many apps and services will result in a compilation error due to the program size limitation.
 
 # Using Finewatch
-## Home screen
+## :house: Home screen
 
 All added applications are shown as icons on the LED screen, in the order they were added.
 
@@ -36,38 +36,37 @@ Use the following controls to manage apps:
 - **B Button:** Start app
 - **AB Buttons:** Close running app
 
-When an app is started started, the A and B buttons will perform different functions, as defined by the app or game running.
-Other inputs may also be used, such as shake, rotate screen, light level, sound level and others.
+When an app is started started, the A and B buttons will perform different functions, as defined by the app or game running.<br/>
+Other inputs may also be used, such as shake, rotate screen, light level, sound level and others.<br/>
 To close an app, press A and B together.
 
-## Watch App
+## :watch: Watch App
 
 Controls:
 - **A Button:** Adjust hours
 - **B Button:** Adjust minutes
 
-## RPS Game
+## :scissors:	RPS Game
 
 Randomly shows rock, paper or scissors when watch is shaken.
 
-## Memory Game
+## :brain: Memory Game
 
-Shows a random set of dots which fade after 10 seconds. Player needs to guess where they were.
-
+Shows a random set of dots which fade after 10 seconds. <br/>
+Player needs to guess where they were.<br/>
 Controls:
 - **A Button:** Move selector dot
 - **B Button:** Select a dot. 
  
-If selected correctly, the dot will blink, otherwise the game ends.
+If selected correctly, the dot will blink, otherwise the game ends.<br/>
 Press A to restart game.
 
-If player found all dots, the score is shown.
+If player found all dots, the score is shown.<br/>
 Press A to restart game.
 
-## Acid Rain Game
+## :cloud_with_rain: Acid Rain Game
 
-Player must avoid falling drops from the top of the screen.
-
+Player must avoid falling drops from the top of the screen.<br/>
 Controls:
 - **A Button:** Move left or restart game
 - **B Button:** Move right 
